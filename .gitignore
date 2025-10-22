@@ -1,0 +1,17 @@
+.venv
+.vscode
+datasets
+models
+
+post_training/flash-attention
+post_training/LLaMA-Factory
+post_training/lm-evaluation-harness
+post_training/verl
+
+**/swanlog/
+**/data/
+**/wandb/
+
+**/__pycache__/
+
+**/*models*/

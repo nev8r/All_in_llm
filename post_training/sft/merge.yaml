@@ -1,0 +1,20 @@
+### model
+model_name_or_path: /root/All_in_llm/models/Qwen2.5-Math-1.5B   # 基础模型路径
+adapter_name_or_path: /root/All_in_llm/post_training/sft/output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-212
+template: qwen
+finetuning_type: lora
+
+### export
+export_dir: /root/All_in_llm/post_training/sft/merge_models/Qwen2.5-1.5B_Math_gsm8k_lora_212   # 导出后的完整模型路径
+export_size: 2                
+export_device: gpu          
+export_legacy_format: false   # 是否导出为旧版兼容格式
+
+# list model
+# Qwen/Qwen2.5-1.5B-Instruct
+# Qwen/Qwen2.5-1.5B
+
+
+# list merges
+# /root/All_in_llm/post_training/sft/merge_models/Qwen2.5-1.5B_Instruct_gsm8k_lora 
+# /root/All_in_llm/post_training/sft/merge_models/Qwen2.5-1.5B_gsm8k_lora 

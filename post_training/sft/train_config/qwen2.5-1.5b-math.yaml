@@ -1,0 +1,56 @@
+# ------------------- 基础模型配置 -------------------
+model_name_or_path: /root/All_in_llm/models/Qwen2.5-Math-1.5B
+
+# ------------------- 训练阶段配置 -------------------
+stage: sft
+do_train: true
+report_to: tensorboard    # Tensorboard设置
+logging_dir: ./log_output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory 
+finetuning_type: lora  # lora微调
+lora_target: all
+lora_rank: 16
+flash_attn: fa2
+lora_alpha: 32
+bf16: true
+
+
+# ------------------- 数据集配置 -------------------
+dataset_dir: /root/All_in_llm/datasets/gsm8k/main
+dataset: gsm8k_math_train              # 对应JSON中定义的数据集名称
+max_samples: null  # null表示使用全部数据，如需部分调试可设为具体数值
+template: qwen  # 必须使用Qwen对应的模板格式
+cutoff_len: 1024  # 上下文最大长度（GSM8K数学题通常不超过此长度）
+overwrite_cache: true  # 重新预处理数据时强制刷新缓存
+preprocessing_num_workers: 16  # 数据预处理并行进程数（根据CPU核数调整）
+
+# ------------------- 训练输出相关 -------------------
+output_dir: ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory  # 输出目录需要存在可写权限
+logging_steps: 10  # 每10步输出一次日志
+save_steps: 20  # 每100步保存一次检查点
+plot_loss: true  # 绘制训练损失曲线
+
+### swanlab
+use_swanlab: true
+swanlab_project: math_gsm8k_lora
+swanlab_run_name: qwen2.5_1.5b_math
+
+# ------------------- 训练超参数 -------------------
+per_device_train_batch_size: 32  
+gradient_accumulation_steps: 4              # 梯度累积步数（等效总batch_size=2*4=8）
+learning_rate: 3e-5                         # 1.5B
+num_train_epochs: 4                         
+max_grad_norm: 0.5                          # 梯度裁剪阈值
+lr_scheduler_type: cosine                   
+warmup_ratio: 0.15                          # warmup阶段占训练总步数的比例
+weight_decay: 0.05                          # 新增权重衰减，防止过拟合
+
+# ------------------- 验证与评估 -------------------
+val_size: 0.1  # 10%数据作为验证集
+per_device_eval_batch_size: 16  # 评估时batch_size可以更大
+eval_strategy: steps  # 按步数评估
+eval_steps: 20  # 每30步验证一次（GSM8K需要及时评估推理能力）
+
+
+# ------------------- 显存优化 -------------------
+gradient_checkpointing: true  # 激活梯度检查点节省显存
+optim: adamw_torch  # 推荐使用AdamW优化器

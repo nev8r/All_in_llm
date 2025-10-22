@@ -1,0 +1,1594 @@
+nohup: ignoring input
+====== 开始训练 =======
+使用设备: GPU 0
+执行命令: llamafactory-cli train /root/All_in_llm/post_training/sft/train_config/qwen2.5-1.5b-math.yaml
+/root/All_in_llm/.venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/root/All_in_llm/.venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+Warning: The cache directory for DeepSpeed Triton autotune, /root/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[INFO|2025-10-18 23:55:25] llamafactory.hparams.parser:423 >> Process rank: 0, world size: 1, device: cuda:0, distributed training: False, compute dtype: torch.bfloat16
+[INFO|tokenization_utils_base.py:2093] 2025-10-18 23:55:25,945 >> loading file vocab.json
+[INFO|tokenization_utils_base.py:2093] 2025-10-18 23:55:25,945 >> loading file merges.txt
+[INFO|tokenization_utils_base.py:2093] 2025-10-18 23:55:25,945 >> loading file tokenizer.json
+[INFO|tokenization_utils_base.py:2093] 2025-10-18 23:55:25,954 >> loading file added_tokens.json
+[INFO|tokenization_utils_base.py:2093] 2025-10-18 23:55:25,957 >> loading file special_tokens_map.json
+[INFO|tokenization_utils_base.py:2093] 2025-10-18 23:55:25,962 >> loading file tokenizer_config.json
+[INFO|tokenization_utils_base.py:2093] 2025-10-18 23:55:25,965 >> loading file chat_template.jinja
+[INFO|tokenization_utils_base.py:2364] 2025-10-18 23:55:26,167 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[INFO|configuration_utils.py:763] 2025-10-18 23:55:26,170 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/config.json
+[INFO|configuration_utils.py:839] 2025-10-18 23:55:26,189 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 4096,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2093] 2025-10-18 23:55:26,191 >> loading file vocab.json
+[INFO|tokenization_utils_base.py:2093] 2025-10-18 23:55:26,193 >> loading file merges.txt
+[INFO|tokenization_utils_base.py:2093] 2025-10-18 23:55:26,195 >> loading file tokenizer.json
+[INFO|tokenization_utils_base.py:2093] 2025-10-18 23:55:26,197 >> loading file added_tokens.json
+[INFO|tokenization_utils_base.py:2093] 2025-10-18 23:55:26,199 >> loading file special_tokens_map.json
+[INFO|tokenization_utils_base.py:2093] 2025-10-18 23:55:26,201 >> loading file tokenizer_config.json
+[INFO|tokenization_utils_base.py:2093] 2025-10-18 23:55:26,204 >> loading file chat_template.jinja
+[INFO|tokenization_utils_base.py:2364] 2025-10-18 23:55:26,422 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[INFO|2025-10-18 23:55:26] llamafactory.data.template:143 >> Replace eos token: <|im_end|>.
+[INFO|2025-10-18 23:55:26] llamafactory.data.loader:143 >> Loading dataset train-00000-of-00001.parquet...
+Converting format of dataset (num_proc=16): 100%|██████████| 7473/7473 [00:00<?, ? examples/s]Converting format of dataset (num_proc=16): 7474 examples [00:00,  4.59 examples/s]           Converting format of dataset (num_proc=16): 14946 examples [00:00, 16578.69 examples/s]
+Running tokenizer on dataset (num_proc=16): 100%|██████████| 7473/7473 [00:00<?, ? examples/s]Running tokenizer on dataset (num_proc=16): 7941 examples [00:00, 575.77 examples/s]          Running tokenizer on dataset (num_proc=16): 8875 examples [00:00, 1724.01 examples/s]Running tokenizer on dataset (num_proc=16): 9342 examples [00:01, 2039.27 examples/s]Running tokenizer on dataset (num_proc=16): 10276 examples [00:01, 3083.17 examples/s]Running tokenizer on dataset (num_proc=16): 11210 examples [00:01, 3865.65 examples/s]Running tokenizer on dataset (num_proc=16): 12144 examples [00:01, 4429.97 examples/s]Running tokenizer on dataset (num_proc=16): 13078 examples [00:01, 5036.25 examples/s]Running tokenizer on dataset (num_proc=16): 14012 examples [00:01, 5347.04 examples/s]Running tokenizer on dataset (num_proc=16): 14946 examples [00:02, 5845.74 examples/s]Running tokenizer on dataset (num_proc=16): 14946 examples [00:02, 3461.05 examples/s]
+[INFO|configuration_utils.py:763] 2025-10-18 23:55:30,126 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/config.json
+[INFO|configuration_utils.py:839] 2025-10-18 23:55:30,126 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 4096,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+training example:
+input_ids:
+[151644, 8948, 198, 2610, 525, 1207, 16948, 11, 3465, 553, 54364, 14817, 13, 1446, 525, 264, 10950, 17847, 13, 151645, 198, 151644, 872, 198, 45, 4212, 685, 6088, 26111, 311, 220, 19, 23, 315, 1059, 4780, 304, 5813, 11, 323, 1221, 1340, 6088, 4279, 438, 1657, 26111, 304, 3217, 13, 2585, 1657, 26111, 1521, 41601, 685, 4559, 30055, 304, 5813, 323, 3217, 30, 151645, 198, 151644, 77091, 198, 45, 4212, 685, 6088, 220, 19, 23, 14, 17, 284, 1115, 19, 23, 14, 17, 28, 17, 19, 2452, 17, 19, 26111, 304, 3217, 624, 45, 4212, 685, 6088, 220, 19, 23, 10, 17, 19, 284, 1115, 19, 23, 10, 17, 19, 28, 22, 17, 2452, 22, 17, 26111, 30055, 304, 5813, 323, 3217, 624, 820, 220, 22, 17, 151645, 198]
+inputs:
+<|im_start|>system
+You are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>
+<|im_start|>user
+Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?<|im_end|>
+<|im_start|>assistant
+Natalia sold 48/2 = <<48/2=24>>24 clips in May.
+Natalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.
+#### 72<|im_end|>
+
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 45, 4212, 685, 6088, 220, 19, 23, 14, 17, 284, 1115, 19, 23, 14, 17, 28, 17, 19, 2452, 17, 19, 26111, 304, 3217, 624, 45, 4212, 685, 6088, 220, 19, 23, 10, 17, 19, 284, 1115, 19, 23, 10, 17, 19, 28, 22, 17, 2452, 22, 17, 26111, 30055, 304, 5813, 323, 3217, 624, 820, 220, 22, 17, 151645, 198]
+labels:
+Natalia sold 48/2 = <<48/2=24>>24 clips in May.
+Natalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.
+#### 72<|im_end|>
+
+[INFO|2025-10-18 23:55:30] llamafactory.model.model_utils.kv_cache:143 >> KV cache is disabled during training.
+[WARNING|logging.py:328] 2025-10-18 23:55:30,911 >> `torch_dtype` is deprecated! Use `dtype` instead!
+[INFO|modeling_utils.py:1173] 2025-10-18 23:55:30,913 >> loading weights file /root/All_in_llm/models/Qwen2.5-Math-1.5B/model.safetensors
+[INFO|modeling_utils.py:2345] 2025-10-18 23:55:30,917 >> Instantiating Qwen2ForCausalLM model under default dtype torch.bfloat16.
+[INFO|configuration_utils.py:986] 2025-10-18 23:55:30,931 >> Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "use_cache": false
+}
+
+[INFO|configuration_utils.py:939] 2025-10-18 23:55:31,693 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/generation_config.json
+[INFO|configuration_utils.py:986] 2025-10-18 23:55:31,694 >> Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "max_new_tokens": 2048
+}
+
+[INFO|dynamic_module_utils.py:423] 2025-10-18 23:55:31,697 >> Could not locate the custom_generate/generate.py inside /root/All_in_llm/models/Qwen2.5-Math-1.5B.
+[INFO|2025-10-18 23:55:31] llamafactory.model.model_utils.checkpointing:143 >> Gradient checkpointing enabled.
+[INFO|2025-10-18 23:55:31] llamafactory.model.model_utils.attention:143 >> Using FlashAttention-2 for faster training and inference.
+[INFO|2025-10-18 23:55:31] llamafactory.model.adapter:143 >> Upcasting trainable params to float32.
+[INFO|2025-10-18 23:55:31] llamafactory.model.adapter:143 >> Fine-tuning method: LoRA
+[INFO|2025-10-18 23:55:31] llamafactory.model.model_utils.misc:143 >> Found linear modules: gate_proj,up_proj,down_proj,o_proj,q_proj,k_proj,v_proj
+[INFO|2025-10-18 23:55:38] llamafactory.model.loader:143 >> trainable params: 18,464,768 || all params: 1,562,179,072 || trainable%: 1.1820
+[WARNING|trainer.py:906] 2025-10-18 23:55:38,391 >> The model is already on multiple devices. Skipping the move to device specified in `args`.
+[INFO|trainer.py:749] 2025-10-18 23:55:38,770 >> Using auto half precision backend
+[WARNING|trainer.py:982] 2025-10-18 23:55:38,773 >> The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 151645, 'bos_token_id': None, 'pad_token_id': 151643}.
+[INFO|trainer.py:2519] 2025-10-18 23:55:39,118 >> ***** Running training *****
+[INFO|trainer.py:2520] 2025-10-18 23:55:39,118 >>   Num examples = 6,725
+[INFO|trainer.py:2521] 2025-10-18 23:55:39,118 >>   Num Epochs = 4
+[INFO|trainer.py:2522] 2025-10-18 23:55:39,120 >>   Instantaneous batch size per device = 32
+[INFO|trainer.py:2525] 2025-10-18 23:55:39,120 >>   Total train batch size (w. parallel, distributed & accumulation) = 128
+[INFO|trainer.py:2526] 2025-10-18 23:55:39,123 >>   Gradient Accumulation steps = 4
+[INFO|trainer.py:2527] 2025-10-18 23:55:39,126 >>   Total optimization steps = 212
+[INFO|trainer.py:2528] 2025-10-18 23:55:39,128 >>   Number of trainable parameters = 18,464,768
+swanlab: Tracking run with swanlab version 0.6.11
+swanlab: Run data will be saved locally in 
+/root/All_in_llm/post_training/sft/swanlog/run-20251018_235543-ehup8724fjva4jjlk
+ie1v
+swanlab: 👋 Hi nev8r,welcome to swanlab!
+swanlab: Syncing run qwen2.5_1.5b_math to the cloud
+swanlab: 🏠 View project at https://swanlab.cn/@nev8r/math_gsm8k_lora
+swanlab: 🚀 View run at 
+https://swanlab.cn/@nev8r/math_gsm8k_lora/runs/ehup8724fjva4jjlkie1v
+  0%|          | 0/212 [00:00<?, ?it/s]  0%|          | 1/212 [00:07<27:14,  7.74s/it]  1%|          | 2/212 [00:12<20:38,  5.90s/it]  1%|▏         | 3/212 [00:17<19:13,  5.52s/it]  2%|▏         | 4/212 [00:22<18:08,  5.23s/it]  2%|▏         | 5/212 [00:28<19:08,  5.55s/it]  3%|▎         | 6/212 [00:32<17:44,  5.17s/it]  3%|▎         | 7/212 [00:38<17:50,  5.22s/it]  4%|▍         | 8/212 [00:42<17:17,  5.08s/it]  4%|▍         | 9/212 [00:47<16:37,  4.91s/it]  5%|▍         | 10/212 [00:51<15:56,  4.73s/it]                                                  5%|▍         | 10/212 [00:51<15:56,  4.73s/it]  5%|▌         | 11/212 [00:56<16:00,  4.78s/it]  6%|▌         | 12/212 [01:01<16:02,  4.81s/it]  6%|▌         | 13/212 [01:06<15:49,  4.77s/it]  7%|▋         | 14/212 [01:11<15:58,  4.84s/it]  7%|▋         | 15/212 [01:16<16:04,  4.90s/it]  8%|▊         | 16/212 [01:20<15:36,  4.78s/it]  8%|▊         | 17/212 [01:25<15:20,  4.72s/it]  8%|▊         | 18/212 [01:30<15:16,  4.73s/it]  9%|▉         | 19/212 [01:34<15:23,  4.79s/it]  9%|▉         | 20/212 [01:39<15:15,  4.77s/it]                                                  9%|▉         | 20/212 [01:39<15:15,  4.77s/it][INFO|trainer.py:4643] 2025-10-18 23:57:26,399 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-10-18 23:57:26,400 >>   Num examples = 748
+[INFO|trainer.py:4648] 2025-10-18 23:57:26,402 >>   Batch size = 16
+{'loss': 1.0312, 'grad_norm': 0.7894137501716614, 'learning_rate': 8.4375e-06, 'epoch': 0.19}
+{'loss': 1.0109, 'grad_norm': 0.8285704851150513, 'learning_rate': 1.78125e-05, 'epoch': 0.38}
+
+  0%|          | 0/47 [00:00<?, ?it/s][A
+  4%|▍         | 2/47 [00:00<00:04, 10.21it/s][A
+  9%|▊         | 4/47 [00:00<00:06,  6.22it/s][A
+ 11%|█         | 5/47 [00:00<00:07,  5.39it/s][A
+ 13%|█▎        | 6/47 [00:01<00:07,  5.65it/s][A
+ 15%|█▍        | 7/47 [00:01<00:06,  5.93it/s][A
+ 17%|█▋        | 8/47 [00:01<00:06,  5.72it/s][A
+ 19%|█▉        | 9/47 [00:01<00:07,  5.29it/s][A
+ 21%|██▏       | 10/47 [00:01<00:07,  5.18it/s][A
+ 23%|██▎       | 11/47 [00:01<00:07,  5.09it/s][A
+ 26%|██▌       | 12/47 [00:02<00:07,  4.94it/s][A
+ 28%|██▊       | 13/47 [00:02<00:06,  5.02it/s][A
+ 30%|██▉       | 14/47 [00:02<00:06,  4.82it/s][A
+ 32%|███▏      | 15/47 [00:02<00:06,  4.84it/s][A
+ 34%|███▍      | 16/47 [00:02<00:06,  5.16it/s][A
+ 36%|███▌      | 17/47 [00:03<00:06,  4.94it/s][A
+ 38%|███▊      | 18/47 [00:03<00:05,  4.84it/s][A
+ 40%|████      | 19/47 [00:03<00:05,  4.91it/s][A
+ 43%|████▎     | 20/47 [00:03<00:04,  5.40it/s][A
+ 45%|████▍     | 21/47 [00:03<00:05,  5.19it/s][A
+ 47%|████▋     | 22/47 [00:04<00:05,  4.97it/s][A
+ 49%|████▉     | 23/47 [00:04<00:04,  5.38it/s][A
+ 51%|█████     | 24/47 [00:04<00:04,  5.29it/s][A
+ 53%|█████▎    | 25/47 [00:04<00:04,  5.13it/s][A
+ 55%|█████▌    | 26/47 [00:04<00:03,  5.25it/s][A
+ 57%|█████▋    | 27/47 [00:05<00:03,  5.11it/s][A
+ 60%|█████▉    | 28/47 [00:05<00:03,  5.44it/s][A
+ 62%|██████▏   | 29/47 [00:05<00:03,  5.37it/s][A
+ 64%|██████▍   | 30/47 [00:05<00:03,  4.83it/s][A
+ 66%|██████▌   | 31/47 [00:05<00:03,  4.96it/s][A
+ 68%|██████▊   | 32/47 [00:06<00:02,  5.10it/s][A
+ 70%|███████   | 33/47 [00:06<00:02,  4.99it/s][A
+ 72%|███████▏  | 34/47 [00:06<00:02,  5.06it/s][A
+ 74%|███████▍  | 35/47 [00:06<00:02,  4.66it/s][A
+ 77%|███████▋  | 36/47 [00:06<00:02,  4.93it/s][A
+ 79%|███████▊  | 37/47 [00:07<00:02,  4.55it/s][A
+ 81%|████████  | 38/47 [00:07<00:01,  4.86it/s][A
+ 83%|████████▎ | 39/47 [00:07<00:01,  4.74it/s][A
+ 85%|████████▌ | 40/47 [00:07<00:01,  4.98it/s][A
+ 87%|████████▋ | 41/47 [00:07<00:01,  5.28it/s][A
+ 89%|████████▉ | 42/47 [00:08<00:00,  5.36it/s][A
+ 91%|█████████▏| 43/47 [00:08<00:00,  5.38it/s][A
+ 94%|█████████▎| 44/47 [00:08<00:00,  5.02it/s][A
+ 96%|█████████▌| 45/47 [00:08<00:00,  4.91it/s][A
+ 98%|█████████▊| 46/47 [00:08<00:00,  4.71it/s][A
+100%|██████████| 47/47 [00:09<00:00,  4.80it/s][A                                                
+                                               [A  9%|▉         | 20/212 [01:49<15:15,  4.77s/it]
+100%|██████████| 47/47 [00:09<00:00,  4.80it/s][A
+                                               [A[INFO|trainer.py:4309] 2025-10-18 23:57:35,835 >> Saving model checkpoint to ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-20
+[INFO|configuration_utils.py:763] 2025-10-18 23:57:35,868 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/config.json
+[INFO|configuration_utils.py:839] 2025-10-18 23:57:35,869 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 4096,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2421] 2025-10-18 23:57:36,247 >> chat template saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-20/chat_template.jinja
+[INFO|tokenization_utils_base.py:2590] 2025-10-18 23:57:36,253 >> tokenizer config file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-20/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2599] 2025-10-18 23:57:36,273 >> Special tokens file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-20/special_tokens_map.json
+ 10%|▉         | 21/212 [01:55<25:49,  8.11s/it] 10%|█         | 22/212 [02:00<22:11,  7.01s/it] 11%|█         | 23/212 [02:05<20:19,  6.45s/it] 11%|█▏        | 24/212 [02:09<18:23,  5.87s/it] 12%|█▏        | 25/212 [02:14<16:55,  5.43s/it] 12%|█▏        | 26/212 [02:18<16:14,  5.24s/it] 13%|█▎        | 27/212 [02:23<15:41,  5.09s/it] 13%|█▎        | 28/212 [02:28<15:12,  4.96s/it] 14%|█▎        | 29/212 [02:32<14:52,  4.88s/it] 14%|█▍        | 30/212 [02:38<14:59,  4.94s/it]                                                 14%|█▍        | 30/212 [02:38<14:59,  4.94s/it] 15%|█▍        | 31/212 [02:43<14:57,  4.96s/it] 15%|█▌        | 32/212 [02:48<14:57,  4.99s/it] 16%|█▌        | 33/212 [02:53<14:47,  4.96s/it] 16%|█▌        | 34/212 [02:57<14:27,  4.87s/it] 17%|█▋        | 35/212 [03:02<14:34,  4.94s/it] 17%|█▋        | 36/212 [03:08<14:55,  5.09s/it] 17%|█▋        | 37/212 [03:15<16:31,  5.67s/it] 18%|█▊        | 38/212 [03:19<15:26,  5.33s/it] 18%|█▊        | 39/212 [03:25<15:29,  5.37s/it] 19%|█▉        | 40/212 [03:29<14:48,  5.16s/it]                                                 19%|█▉        | 40/212 [03:29<14:48,  5.16s/it][INFO|trainer.py:4643] 2025-10-18 23:59:16,617 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-10-18 23:59:16,617 >>   Num examples = 748
+[INFO|trainer.py:4648] 2025-10-18 23:59:16,620 >>   Batch size = 16
+{'eval_loss': 0.9716246724128723, 'eval_runtime': 9.4019, 'eval_samples_per_second': 79.558, 'eval_steps_per_second': 4.999, 'epoch': 0.38}
+{'loss': 0.9254, 'grad_norm': 0.4671391248703003, 'learning_rate': 2.71875e-05, 'epoch': 0.57}
+{'loss': 0.7956, 'grad_norm': 0.4310130774974823, 'learning_rate': 2.9888192274619833e-05, 'epoch': 0.76}
+
+  0%|          | 0/47 [00:00<?, ?it/s][A
+  4%|▍         | 2/47 [00:00<00:04, 10.21it/s][A
+  9%|▊         | 4/47 [00:00<00:06,  6.22it/s][A
+ 11%|█         | 5/47 [00:00<00:07,  5.36it/s][A
+ 13%|█▎        | 6/47 [00:01<00:07,  5.62it/s][A
+ 15%|█▍        | 7/47 [00:01<00:06,  5.94it/s][A
+ 17%|█▋        | 8/47 [00:01<00:06,  5.72it/s][A
+ 19%|█▉        | 9/47 [00:01<00:07,  5.28it/s][A
+ 21%|██▏       | 10/47 [00:01<00:07,  5.17it/s][A
+ 23%|██▎       | 11/47 [00:01<00:07,  5.09it/s][A
+ 26%|██▌       | 12/47 [00:02<00:07,  4.94it/s][A
+ 28%|██▊       | 13/47 [00:02<00:06,  5.03it/s][A
+ 30%|██▉       | 14/47 [00:02<00:06,  4.83it/s][A
+ 32%|███▏      | 15/47 [00:02<00:06,  4.83it/s][A
+ 34%|███▍      | 16/47 [00:02<00:06,  5.16it/s][A
+ 36%|███▌      | 17/47 [00:03<00:06,  4.93it/s][A
+ 38%|███▊      | 18/47 [00:03<00:05,  4.86it/s][A
+ 40%|████      | 19/47 [00:03<00:05,  4.92it/s][A
+ 43%|████▎     | 20/47 [00:03<00:04,  5.42it/s][A
+ 45%|████▍     | 21/47 [00:03<00:05,  5.20it/s][A
+ 47%|████▋     | 22/47 [00:04<00:05,  4.97it/s][A
+ 49%|████▉     | 23/47 [00:04<00:04,  5.38it/s][A
+ 51%|█████     | 24/47 [00:04<00:04,  5.28it/s][A
+ 53%|█████▎    | 25/47 [00:04<00:04,  5.11it/s][A
+ 55%|█████▌    | 26/47 [00:04<00:04,  5.23it/s][A
+ 57%|█████▋    | 27/47 [00:05<00:03,  5.09it/s][A
+ 60%|█████▉    | 28/47 [00:05<00:03,  5.42it/s][A
+ 62%|██████▏   | 29/47 [00:05<00:03,  5.35it/s][A
+ 64%|██████▍   | 30/47 [00:05<00:03,  4.81it/s][A
+ 66%|██████▌   | 31/47 [00:05<00:03,  4.96it/s][A
+ 68%|██████▊   | 32/47 [00:06<00:02,  5.10it/s][A
+ 70%|███████   | 33/47 [00:06<00:02,  4.99it/s][A
+ 72%|███████▏  | 34/47 [00:06<00:02,  5.06it/s][A
+ 74%|███████▍  | 35/47 [00:06<00:02,  4.67it/s][A
+ 77%|███████▋  | 36/47 [00:06<00:02,  4.95it/s][A
+ 79%|███████▊  | 37/47 [00:07<00:02,  4.57it/s][A
+ 81%|████████  | 38/47 [00:07<00:01,  4.89it/s][A
+ 83%|████████▎ | 39/47 [00:07<00:01,  4.77it/s][A
+ 85%|████████▌ | 40/47 [00:07<00:01,  5.01it/s][A
+ 87%|████████▋ | 41/47 [00:07<00:01,  5.30it/s][A
+ 89%|████████▉ | 42/47 [00:08<00:00,  5.38it/s][A
+ 91%|█████████▏| 43/47 [00:08<00:00,  5.41it/s][A
+ 94%|█████████▎| 44/47 [00:08<00:00,  5.04it/s][A
+ 96%|█████████▌| 45/47 [00:08<00:00,  4.93it/s][A
+ 98%|█████████▊| 46/47 [00:08<00:00,  4.72it/s][A
+100%|██████████| 47/47 [00:09<00:00,  4.83it/s][A                                                
+                                               [A 19%|█▉        | 40/212 [03:39<14:48,  5.16s/it]
+100%|██████████| 47/47 [00:09<00:00,  4.83it/s][A
+                                               [A[INFO|trainer.py:4309] 2025-10-18 23:59:26,031 >> Saving model checkpoint to ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-40
+[INFO|configuration_utils.py:763] 2025-10-18 23:59:26,107 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/config.json
+[INFO|configuration_utils.py:839] 2025-10-18 23:59:26,107 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 4096,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2421] 2025-10-18 23:59:26,464 >> chat template saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-40/chat_template.jinja
+[INFO|tokenization_utils_base.py:2590] 2025-10-18 23:59:26,470 >> tokenizer config file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-40/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2599] 2025-10-18 23:59:26,476 >> Special tokens file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-40/special_tokens_map.json
+ 19%|█▉        | 41/212 [03:45<23:50,  8.36s/it] 20%|█▉        | 42/212 [03:50<20:35,  7.27s/it] 20%|██        | 43/212 [03:55<18:36,  6.61s/it] 21%|██        | 44/212 [04:00<17:19,  6.19s/it] 21%|██        | 45/212 [04:06<16:28,  5.92s/it] 22%|██▏       | 46/212 [04:10<15:15,  5.51s/it] 22%|██▏       | 47/212 [04:15<14:34,  5.30s/it] 23%|██▎       | 48/212 [04:20<14:10,  5.19s/it] 23%|██▎       | 49/212 [04:25<14:01,  5.16s/it] 24%|██▎       | 50/212 [04:29<13:01,  4.83s/it]                                                 24%|██▎       | 50/212 [04:29<13:01,  4.83s/it] 24%|██▍       | 51/212 [04:33<12:40,  4.72s/it] 25%|██▍       | 52/212 [04:38<12:46,  4.79s/it] 25%|██▌       | 53/212 [04:42<11:29,  4.34s/it] 25%|██▌       | 54/212 [04:47<12:16,  4.66s/it] 26%|██▌       | 55/212 [04:52<12:41,  4.85s/it] 26%|██▋       | 56/212 [04:58<12:58,  4.99s/it] 27%|██▋       | 57/212 [05:03<12:57,  5.01s/it] 27%|██▋       | 58/212 [05:07<12:31,  4.88s/it] 28%|██▊       | 59/212 [05:12<12:36,  4.94s/it] 28%|██▊       | 60/212 [05:17<12:11,  4.81s/it]                                                 28%|██▊       | 60/212 [05:17<12:11,  4.81s/it][INFO|trainer.py:4643] 2025-10-19 00:01:04,131 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-10-19 00:01:04,132 >>   Num examples = 748
+[INFO|trainer.py:4648] 2025-10-19 00:01:04,134 >>   Batch size = 16
+{'eval_loss': 0.7247046828269958, 'eval_runtime': 9.3928, 'eval_samples_per_second': 79.636, 'eval_steps_per_second': 5.004, 'epoch': 0.76}
+{'loss': 0.698, 'grad_norm': 0.3427662253379822, 'learning_rate': 2.9344571339445534e-05, 'epoch': 0.95}
+{'loss': 0.6115, 'grad_norm': 0.21272453665733337, 'learning_rate': 2.8365097862825516e-05, 'epoch': 1.13}
+
+  0%|          | 0/47 [00:00<?, ?it/s][A
+  4%|▍         | 2/47 [00:00<00:04, 10.27it/s][A
+  9%|▊         | 4/47 [00:00<00:06,  6.24it/s][A
+ 11%|█         | 5/47 [00:00<00:07,  5.40it/s][A
+ 13%|█▎        | 6/47 [00:01<00:07,  5.66it/s][A
+ 15%|█▍        | 7/47 [00:01<00:06,  5.94it/s][A
+ 17%|█▋        | 8/47 [00:01<00:06,  5.72it/s][A
+ 19%|█▉        | 9/47 [00:01<00:07,  5.29it/s][A
+ 21%|██▏       | 10/47 [00:01<00:07,  5.17it/s][A
+ 23%|██▎       | 11/47 [00:01<00:07,  5.09it/s][A
+ 26%|██▌       | 12/47 [00:02<00:07,  4.94it/s][A
+ 28%|██▊       | 13/47 [00:02<00:06,  5.02it/s][A
+ 30%|██▉       | 14/47 [00:02<00:06,  4.82it/s][A
+ 32%|███▏      | 15/47 [00:02<00:06,  4.82it/s][A
+ 34%|███▍      | 16/47 [00:02<00:06,  5.14it/s][A
+ 36%|███▌      | 17/47 [00:03<00:06,  4.92it/s][A
+ 38%|███▊      | 18/47 [00:03<00:05,  4.85it/s][A
+ 40%|████      | 19/47 [00:03<00:05,  4.94it/s][A
+ 43%|████▎     | 20/47 [00:03<00:04,  5.44it/s][A
+ 45%|████▍     | 21/47 [00:03<00:04,  5.22it/s][A
+ 47%|████▋     | 22/47 [00:04<00:05,  4.98it/s][A
+ 49%|████▉     | 23/47 [00:04<00:04,  5.39it/s][A
+ 51%|█████     | 24/47 [00:04<00:04,  5.28it/s][A
+ 53%|█████▎    | 25/47 [00:04<00:04,  5.12it/s][A
+ 55%|█████▌    | 26/47 [00:04<00:04,  5.24it/s][A
+ 57%|█████▋    | 27/47 [00:05<00:03,  5.08it/s][A
+ 60%|█████▉    | 28/47 [00:05<00:03,  5.40it/s][A
+ 62%|██████▏   | 29/47 [00:05<00:03,  5.34it/s][A
+ 64%|██████▍   | 30/47 [00:05<00:03,  4.81it/s][A
+ 66%|██████▌   | 31/47 [00:05<00:03,  4.96it/s][A
+ 68%|██████▊   | 32/47 [00:06<00:02,  5.10it/s][A
+ 70%|███████   | 33/47 [00:06<00:02,  4.99it/s][A
+ 72%|███████▏  | 34/47 [00:06<00:02,  5.06it/s][A
+ 74%|███████▍  | 35/47 [00:06<00:02,  4.67it/s][A
+ 77%|███████▋  | 36/47 [00:06<00:02,  4.95it/s][A
+ 79%|███████▊  | 37/47 [00:07<00:02,  4.55it/s][A
+ 81%|████████  | 38/47 [00:07<00:01,  4.86it/s][A
+ 83%|████████▎ | 39/47 [00:07<00:01,  4.74it/s][A
+ 85%|████████▌ | 40/47 [00:07<00:01,  4.99it/s][A
+ 87%|████████▋ | 41/47 [00:07<00:01,  5.29it/s][A
+ 89%|████████▉ | 42/47 [00:08<00:00,  5.37it/s][A
+ 91%|█████████▏| 43/47 [00:08<00:00,  5.40it/s][A
+ 94%|█████████▎| 44/47 [00:08<00:00,  4.91it/s][A
+ 96%|█████████▌| 45/47 [00:08<00:00,  4.84it/s][A
+ 98%|█████████▊| 46/47 [00:08<00:00,  4.66it/s][A
+100%|██████████| 47/47 [00:09<00:00,  4.79it/s][A                                                
+                                               [A 28%|██▊       | 60/212 [05:26<12:11,  4.81s/it]
+100%|██████████| 47/47 [00:09<00:00,  4.79it/s][A
+                                               [A[INFO|trainer.py:4309] 2025-10-19 00:01:13,566 >> Saving model checkpoint to ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-60
+[INFO|configuration_utils.py:763] 2025-10-19 00:01:13,601 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/config.json
+[INFO|configuration_utils.py:839] 2025-10-19 00:01:13,601 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 4096,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2421] 2025-10-19 00:01:13,954 >> chat template saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-60/chat_template.jinja
+[INFO|tokenization_utils_base.py:2590] 2025-10-19 00:01:13,960 >> tokenizer config file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-60/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2599] 2025-10-19 00:01:13,966 >> Special tokens file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-60/special_tokens_map.json
+ 29%|██▉       | 61/212 [05:33<20:16,  8.05s/it] 29%|██▉       | 62/212 [05:38<18:00,  7.20s/it] 30%|██▉       | 63/212 [05:43<16:06,  6.49s/it] 30%|███       | 64/212 [05:48<15:01,  6.09s/it] 31%|███       | 65/212 [05:52<13:44,  5.61s/it] 31%|███       | 66/212 [05:57<13:16,  5.46s/it] 32%|███▏      | 67/212 [06:03<13:05,  5.42s/it] 32%|███▏      | 68/212 [06:08<12:50,  5.35s/it] 33%|███▎      | 69/212 [06:12<12:11,  5.12s/it] 33%|███▎      | 70/212 [06:17<11:42,  4.94s/it]                                                 33%|███▎      | 70/212 [06:17<11:42,  4.94s/it] 33%|███▎      | 71/212 [06:22<11:42,  4.98s/it] 34%|███▍      | 72/212 [06:26<11:06,  4.76s/it] 34%|███▍      | 73/212 [06:31<10:50,  4.68s/it] 35%|███▍      | 74/212 [06:36<11:09,  4.85s/it] 35%|███▌      | 75/212 [06:41<10:57,  4.80s/it] 36%|███▌      | 76/212 [06:46<11:02,  4.87s/it] 36%|███▋      | 77/212 [06:50<10:48,  4.80s/it] 37%|███▋      | 78/212 [06:55<10:53,  4.87s/it] 37%|███▋      | 79/212 [07:00<10:44,  4.85s/it] 38%|███▊      | 80/212 [07:05<10:36,  4.82s/it]                                                 38%|███▊      | 80/212 [07:05<10:36,  4.82s/it][INFO|trainer.py:4643] 2025-10-19 00:02:52,206 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-10-19 00:02:52,207 >>   Num examples = 748
+[INFO|trainer.py:4648] 2025-10-19 00:02:52,210 >>   Batch size = 16
+{'eval_loss': 0.5767296552658081, 'eval_runtime': 9.4146, 'eval_samples_per_second': 79.451, 'eval_steps_per_second': 4.992, 'epoch': 1.13}
+{'loss': 0.5774, 'grad_norm': 0.1209711804986, 'learning_rate': 2.6979532650709395e-05, 'epoch': 1.32}
+{'loss': 0.5539, 'grad_norm': 0.10657018423080444, 'learning_rate': 2.5229975400937478e-05, 'epoch': 1.51}
+
+  0%|          | 0/47 [00:00<?, ?it/s][A
+  4%|▍         | 2/47 [00:00<00:04, 10.30it/s][A
+  9%|▊         | 4/47 [00:00<00:06,  6.23it/s][A
+ 11%|█         | 5/47 [00:00<00:07,  5.40it/s][A
+ 13%|█▎        | 6/47 [00:01<00:07,  5.67it/s][A
+ 15%|█▍        | 7/47 [00:01<00:06,  5.96it/s][A
+ 17%|█▋        | 8/47 [00:01<00:06,  5.73it/s][A
+ 19%|█▉        | 9/47 [00:01<00:07,  5.28it/s][A
+ 21%|██▏       | 10/47 [00:01<00:07,  5.17it/s][A
+ 23%|██▎       | 11/47 [00:01<00:07,  5.09it/s][A
+ 26%|██▌       | 12/47 [00:02<00:07,  4.94it/s][A
+ 28%|██▊       | 13/47 [00:02<00:06,  5.00it/s][A
+ 30%|██▉       | 14/47 [00:02<00:06,  4.81it/s][A
+ 32%|███▏      | 15/47 [00:02<00:06,  4.83it/s][A
+ 34%|███▍      | 16/47 [00:02<00:06,  5.14it/s][A
+ 36%|███▌      | 17/47 [00:03<00:06,  4.92it/s][A
+ 38%|███▊      | 18/47 [00:03<00:05,  4.85it/s][A
+ 40%|████      | 19/47 [00:03<00:05,  4.92it/s][A
+ 43%|████▎     | 20/47 [00:03<00:04,  5.42it/s][A
+ 45%|████▍     | 21/47 [00:03<00:05,  5.20it/s][A
+ 47%|████▋     | 22/47 [00:04<00:05,  4.96it/s][A
+ 49%|████▉     | 23/47 [00:04<00:04,  5.36it/s][A
+ 51%|█████     | 24/47 [00:04<00:04,  5.27it/s][A
+ 53%|█████▎    | 25/47 [00:04<00:04,  5.06it/s][A
+ 55%|█████▌    | 26/47 [00:04<00:04,  5.20it/s][A
+ 57%|█████▋    | 27/47 [00:05<00:03,  5.06it/s][A
+ 60%|█████▉    | 28/47 [00:05<00:03,  5.38it/s][A
+ 62%|██████▏   | 29/47 [00:05<00:03,  5.32it/s][A
+ 64%|██████▍   | 30/47 [00:05<00:03,  4.79it/s][A
+ 66%|██████▌   | 31/47 [00:05<00:03,  4.94it/s][A
+ 68%|██████▊   | 32/47 [00:06<00:02,  5.08it/s][A
+ 70%|███████   | 33/47 [00:06<00:02,  4.98it/s][A
+ 72%|███████▏  | 34/47 [00:06<00:02,  5.05it/s][A
+ 74%|███████▍  | 35/47 [00:06<00:02,  4.66it/s][A
+ 77%|███████▋  | 36/47 [00:06<00:02,  4.94it/s][A
+ 79%|███████▊  | 37/47 [00:07<00:02,  4.55it/s][A
+ 81%|████████  | 38/47 [00:07<00:01,  4.85it/s][A
+ 83%|████████▎ | 39/47 [00:07<00:01,  4.73it/s][A
+ 85%|████████▌ | 40/47 [00:07<00:01,  4.97it/s][A
+ 87%|████████▋ | 41/47 [00:07<00:01,  5.27it/s][A
+ 89%|████████▉ | 42/47 [00:08<00:00,  5.35it/s][A
+ 91%|█████████▏| 43/47 [00:08<00:00,  5.36it/s][A
+ 94%|█████████▎| 44/47 [00:08<00:00,  4.99it/s][A
+ 96%|█████████▌| 45/47 [00:08<00:00,  4.92it/s][A
+ 98%|█████████▊| 46/47 [00:08<00:00,  4.72it/s][A
+100%|██████████| 47/47 [00:09<00:00,  4.81it/s][A                                                
+                                               [A 38%|███▊      | 80/212 [07:14<10:36,  4.82s/it]
+100%|██████████| 47/47 [00:09<00:00,  4.81it/s][A
+                                               [A[INFO|trainer.py:4309] 2025-10-19 00:03:01,642 >> Saving model checkpoint to ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-80
+[INFO|configuration_utils.py:763] 2025-10-19 00:03:01,674 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/config.json
+[INFO|configuration_utils.py:839] 2025-10-19 00:03:01,675 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 4096,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2421] 2025-10-19 00:03:02,025 >> chat template saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-80/chat_template.jinja
+[INFO|tokenization_utils_base.py:2590] 2025-10-19 00:03:02,033 >> tokenizer config file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-80/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2599] 2025-10-19 00:03:02,047 >> Special tokens file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-80/special_tokens_map.json
+ 38%|███▊      | 81/212 [07:21<17:34,  8.05s/it] 39%|███▊      | 82/212 [07:26<15:47,  7.29s/it] 39%|███▉      | 83/212 [07:32<14:28,  6.73s/it] 40%|███▉      | 84/212 [07:36<13:03,  6.12s/it] 40%|████      | 85/212 [07:41<12:03,  5.69s/it] 41%|████      | 86/212 [07:46<11:25,  5.44s/it] 41%|████      | 87/212 [07:51<11:02,  5.30s/it] 42%|████▏     | 88/212 [07:56<11:02,  5.34s/it] 42%|████▏     | 89/212 [08:01<10:42,  5.22s/it] 42%|████▏     | 90/212 [08:06<10:33,  5.19s/it]                                                 42%|████▏     | 90/212 [08:06<10:33,  5.19s/it] 43%|████▎     | 91/212 [08:11<10:11,  5.06s/it] 43%|████▎     | 92/212 [08:16<09:54,  4.96s/it] 44%|████▍     | 93/212 [08:20<09:36,  4.85s/it] 44%|████▍     | 94/212 [08:25<09:38,  4.91s/it] 45%|████▍     | 95/212 [08:30<09:22,  4.80s/it] 45%|████▌     | 96/212 [08:35<09:17,  4.80s/it] 46%|████▌     | 97/212 [08:40<09:26,  4.93s/it] 46%|████▌     | 98/212 [08:45<09:22,  4.94s/it] 47%|████▋     | 99/212 [08:49<09:06,  4.84s/it] 47%|████▋     | 100/212 [08:55<09:15,  4.96s/it]                                                  47%|████▋     | 100/212 [08:55<09:15,  4.96s/it][INFO|trainer.py:4643] 2025-10-19 00:04:41,917 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-10-19 00:04:41,918 >>   Num examples = 748
+[INFO|trainer.py:4648] 2025-10-19 00:04:41,920 >>   Batch size = 16
+{'eval_loss': 0.5318953990936279, 'eval_runtime': 9.4176, 'eval_samples_per_second': 79.426, 'eval_steps_per_second': 4.991, 'epoch': 1.51}
+{'loss': 0.5392, 'grad_norm': 0.10486426949501038, 'learning_rate': 2.316958552522541e-05, 'epoch': 1.7}
+{'loss': 0.5366, 'grad_norm': 0.09701680392026901, 'learning_rate': 2.0860966927339104e-05, 'epoch': 1.89}
+
+  0%|          | 0/47 [00:00<?, ?it/s][A
+  4%|▍         | 2/47 [00:00<00:04, 10.33it/s][A
+  9%|▊         | 4/47 [00:00<00:06,  6.24it/s][A
+ 11%|█         | 5/47 [00:00<00:07,  5.38it/s][A
+ 13%|█▎        | 6/47 [00:01<00:07,  5.64it/s][A
+ 15%|█▍        | 7/47 [00:01<00:06,  5.94it/s][A
+ 17%|█▋        | 8/47 [00:01<00:06,  5.72it/s][A
+ 19%|█▉        | 9/47 [00:01<00:07,  5.29it/s][A
+ 21%|██▏       | 10/47 [00:01<00:07,  5.18it/s][A
+ 23%|██▎       | 11/47 [00:01<00:07,  5.09it/s][A
+ 26%|██▌       | 12/47 [00:02<00:07,  4.95it/s][A
+ 28%|██▊       | 13/47 [00:02<00:06,  5.04it/s][A
+ 30%|██▉       | 14/47 [00:02<00:06,  4.84it/s][A
+ 32%|███▏      | 15/47 [00:02<00:06,  4.85it/s][A
+ 34%|███▍      | 16/47 [00:02<00:05,  5.18it/s][A
+ 36%|███▌      | 17/47 [00:03<00:06,  4.96it/s][A
+ 38%|███▊      | 18/47 [00:03<00:05,  4.88it/s][A
+ 40%|████      | 19/47 [00:03<00:05,  4.95it/s][A
+ 43%|████▎     | 20/47 [00:03<00:04,  5.46it/s][A
+ 45%|████▍     | 21/47 [00:03<00:04,  5.23it/s][A
+ 47%|████▋     | 22/47 [00:04<00:05,  4.98it/s][A
+ 49%|████▉     | 23/47 [00:04<00:04,  5.37it/s][A
+ 51%|█████     | 24/47 [00:04<00:04,  5.27it/s][A
+ 53%|█████▎    | 25/47 [00:04<00:04,  5.10it/s][A
+ 55%|█████▌    | 26/47 [00:04<00:04,  5.22it/s][A
+ 57%|█████▋    | 27/47 [00:05<00:03,  5.07it/s][A
+ 60%|█████▉    | 28/47 [00:05<00:03,  5.38it/s][A
+ 62%|██████▏   | 29/47 [00:05<00:03,  5.31it/s][A
+ 64%|██████▍   | 30/47 [00:05<00:03,  4.79it/s][A
+ 66%|██████▌   | 31/47 [00:05<00:03,  4.94it/s][A
+ 68%|██████▊   | 32/47 [00:06<00:02,  5.08it/s][A
+ 70%|███████   | 33/47 [00:06<00:02,  4.98it/s][A
+ 72%|███████▏  | 34/47 [00:06<00:02,  5.04it/s][A
+ 74%|███████▍  | 35/47 [00:06<00:02,  4.65it/s][A
+ 77%|███████▋  | 36/47 [00:06<00:02,  4.93it/s][A
+ 79%|███████▊  | 37/47 [00:07<00:02,  4.55it/s][A
+ 81%|████████  | 38/47 [00:07<00:01,  4.85it/s][A
+ 83%|████████▎ | 39/47 [00:07<00:01,  4.73it/s][A
+ 85%|████████▌ | 40/47 [00:07<00:01,  4.96it/s][A
+ 87%|████████▋ | 41/47 [00:07<00:01,  5.26it/s][A
+ 89%|████████▉ | 42/47 [00:08<00:00,  5.35it/s][A
+ 91%|█████████▏| 43/47 [00:08<00:00,  5.38it/s][A
+ 94%|█████████▎| 44/47 [00:08<00:00,  5.01it/s][A
+ 96%|█████████▌| 45/47 [00:08<00:00,  4.91it/s][A
+ 98%|█████████▊| 46/47 [00:08<00:00,  4.70it/s][A
+100%|██████████| 47/47 [00:09<00:00,  4.82it/s][A                                                 
+                                               [A 47%|████▋     | 100/212 [09:04<09:15,  4.96s/it]
+100%|██████████| 47/47 [00:09<00:00,  4.82it/s][A
+                                               [A[INFO|trainer.py:4309] 2025-10-19 00:04:51,350 >> Saving model checkpoint to ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-100
+[INFO|configuration_utils.py:763] 2025-10-19 00:04:51,383 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/config.json
+[INFO|configuration_utils.py:839] 2025-10-19 00:04:51,384 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 4096,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2421] 2025-10-19 00:04:51,740 >> chat template saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-100/chat_template.jinja
+[INFO|tokenization_utils_base.py:2590] 2025-10-19 00:04:51,747 >> tokenizer config file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-100/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2599] 2025-10-19 00:04:51,755 >> Special tokens file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-100/special_tokens_map.json
+ 48%|████▊     | 101/212 [09:10<14:52,  8.04s/it] 48%|████▊     | 102/212 [09:15<13:09,  7.18s/it] 49%|████▊     | 103/212 [09:20<11:46,  6.49s/it] 49%|████▉     | 104/212 [09:25<10:42,  5.95s/it] 50%|████▉     | 105/212 [09:30<10:04,  5.65s/it] 50%|█████     | 106/212 [09:33<08:42,  4.93s/it] 50%|█████     | 107/212 [09:38<08:38,  4.93s/it] 51%|█████     | 108/212 [09:43<08:45,  5.05s/it] 51%|█████▏    | 109/212 [09:48<08:28,  4.93s/it] 52%|█████▏    | 110/212 [09:52<08:15,  4.86s/it]                                                  52%|█████▏    | 110/212 [09:53<08:15,  4.86s/it] 52%|█████▏    | 111/212 [09:57<08:10,  4.85s/it] 53%|█████▎    | 112/212 [10:03<08:15,  4.95s/it] 53%|█████▎    | 113/212 [10:08<08:25,  5.10s/it] 54%|█████▍    | 114/212 [10:13<08:19,  5.10s/it] 54%|█████▍    | 115/212 [10:18<08:19,  5.15s/it] 55%|█████▍    | 116/212 [10:24<08:15,  5.16s/it] 55%|█████▌    | 117/212 [10:28<07:50,  4.95s/it] 56%|█████▌    | 118/212 [10:33<07:41,  4.91s/it] 56%|█████▌    | 119/212 [10:38<07:40,  4.95s/it] 57%|█████▋    | 120/212 [10:42<07:24,  4.83s/it]                                                  57%|█████▋    | 120/212 [10:42<07:24,  4.83s/it][INFO|trainer.py:4643] 2025-10-19 00:06:29,600 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-10-19 00:06:29,604 >>   Num examples = 748
+[INFO|trainer.py:4648] 2025-10-19 00:06:29,607 >>   Batch size = 16
+{'eval_loss': 0.5158562064170837, 'eval_runtime': 9.4066, 'eval_samples_per_second': 79.518, 'eval_steps_per_second': 4.996, 'epoch': 1.89}
+{'loss': 0.527, 'grad_norm': 0.08781902492046356, 'learning_rate': 1.8374265815157978e-05, 'epoch': 2.08}
+{'loss': 0.5212, 'grad_norm': 0.09395813941955566, 'learning_rate': 1.578503934364416e-05, 'epoch': 2.27}
+
+  0%|          | 0/47 [00:00<?, ?it/s][A
+  4%|▍         | 2/47 [00:00<00:04, 10.22it/s][A
+  9%|▊         | 4/47 [00:00<00:06,  6.22it/s][A
+ 11%|█         | 5/47 [00:00<00:07,  5.38it/s][A
+ 13%|█▎        | 6/47 [00:01<00:07,  5.64it/s][A
+ 15%|█▍        | 7/47 [00:01<00:06,  5.94it/s][A
+ 17%|█▋        | 8/47 [00:01<00:06,  5.71it/s][A
+ 19%|█▉        | 9/47 [00:01<00:07,  5.28it/s][A
+ 21%|██▏       | 10/47 [00:01<00:07,  5.13it/s][A
+ 23%|██▎       | 11/47 [00:01<00:07,  5.06it/s][A
+ 26%|██▌       | 12/47 [00:02<00:07,  4.93it/s][A
+ 28%|██▊       | 13/47 [00:02<00:06,  5.01it/s][A
+ 30%|██▉       | 14/47 [00:02<00:06,  4.82it/s][A
+ 32%|███▏      | 15/47 [00:02<00:06,  4.84it/s][A
+ 34%|███▍      | 16/47 [00:02<00:06,  5.16it/s][A
+ 36%|███▌      | 17/47 [00:03<00:06,  4.93it/s][A
+ 38%|███▊      | 18/47 [00:03<00:05,  4.86it/s][A
+ 40%|████      | 19/47 [00:03<00:05,  4.93it/s][A
+ 43%|████▎     | 20/47 [00:03<00:04,  5.43it/s][A
+ 45%|████▍     | 21/47 [00:03<00:04,  5.20it/s][A
+ 47%|████▋     | 22/47 [00:04<00:05,  4.95it/s][A
+ 49%|████▉     | 23/47 [00:04<00:04,  5.36it/s][A
+ 51%|█████     | 24/47 [00:04<00:04,  5.27it/s][A
+ 53%|█████▎    | 25/47 [00:04<00:04,  5.12it/s][A
+ 55%|█████▌    | 26/47 [00:04<00:03,  5.25it/s][A
+ 57%|█████▋    | 27/47 [00:05<00:03,  5.11it/s][A
+ 60%|█████▉    | 28/47 [00:05<00:03,  5.43it/s][A
+ 62%|██████▏   | 29/47 [00:05<00:03,  5.36it/s][A
+ 64%|██████▍   | 30/47 [00:05<00:03,  4.83it/s][A
+ 66%|██████▌   | 31/47 [00:05<00:03,  4.98it/s][A
+ 68%|██████▊   | 32/47 [00:06<00:02,  5.12it/s][A
+ 70%|███████   | 33/47 [00:06<00:02,  5.01it/s][A
+ 72%|███████▏  | 34/47 [00:06<00:02,  5.07it/s][A
+ 74%|███████▍  | 35/47 [00:06<00:02,  4.67it/s][A
+ 77%|███████▋  | 36/47 [00:06<00:02,  4.95it/s][A
+ 79%|███████▊  | 37/47 [00:07<00:02,  4.56it/s][A
+ 81%|████████  | 38/47 [00:07<00:01,  4.86it/s][A
+ 83%|████████▎ | 39/47 [00:07<00:01,  4.74it/s][A
+ 85%|████████▌ | 40/47 [00:07<00:01,  4.98it/s][A
+ 87%|████████▋ | 41/47 [00:07<00:01,  5.28it/s][A
+ 89%|████████▉ | 42/47 [00:08<00:00,  5.33it/s][A
+ 91%|█████████▏| 43/47 [00:08<00:00,  5.36it/s][A
+ 94%|█████████▎| 44/47 [00:08<00:00,  5.00it/s][A
+ 96%|█████████▌| 45/47 [00:08<00:00,  4.90it/s][A
+ 98%|█████████▊| 46/47 [00:08<00:00,  4.69it/s][A
+100%|██████████| 47/47 [00:09<00:00,  4.81it/s][A                                                 
+                                               [A 57%|█████▋    | 120/212 [10:52<07:24,  4.83s/it]
+100%|██████████| 47/47 [00:09<00:00,  4.81it/s][A
+                                               [A[INFO|trainer.py:4309] 2025-10-19 00:06:39,031 >> Saving model checkpoint to ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-120
+[INFO|configuration_utils.py:763] 2025-10-19 00:06:39,065 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/config.json
+[INFO|configuration_utils.py:839] 2025-10-19 00:06:39,066 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 4096,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2421] 2025-10-19 00:06:39,444 >> chat template saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-120/chat_template.jinja
+[INFO|tokenization_utils_base.py:2590] 2025-10-19 00:06:39,451 >> tokenizer config file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-120/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2599] 2025-10-19 00:06:39,457 >> Special tokens file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-120/special_tokens_map.json
+ 57%|█████▋    | 121/212 [10:58<12:20,  8.14s/it] 58%|█████▊    | 122/212 [11:03<10:40,  7.12s/it] 58%|█████▊    | 123/212 [11:08<09:41,  6.53s/it] 58%|█████▊    | 124/212 [11:13<09:00,  6.14s/it] 59%|█████▉    | 125/212 [11:19<08:29,  5.86s/it] 59%|█████▉    | 126/212 [11:23<07:57,  5.55s/it] 60%|█████▉    | 127/212 [11:28<07:24,  5.22s/it] 60%|██████    | 128/212 [11:33<07:17,  5.21s/it] 61%|██████    | 129/212 [11:38<07:15,  5.25s/it] 61%|██████▏   | 130/212 [11:43<06:55,  5.06s/it]                                                  61%|██████▏   | 130/212 [11:43<06:55,  5.06s/it] 62%|██████▏   | 131/212 [11:48<06:42,  4.97s/it] 62%|██████▏   | 132/212 [11:53<06:32,  4.90s/it] 63%|██████▎   | 133/212 [11:57<06:20,  4.81s/it] 63%|██████▎   | 134/212 [12:02<06:22,  4.90s/it] 64%|██████▎   | 135/212 [12:07<06:23,  4.98s/it] 64%|██████▍   | 136/212 [12:12<06:14,  4.93s/it] 65%|██████▍   | 137/212 [12:17<06:06,  4.89s/it] 65%|██████▌   | 138/212 [12:22<06:00,  4.87s/it] 66%|██████▌   | 139/212 [12:27<05:59,  4.92s/it] 66%|██████▌   | 140/212 [12:31<05:46,  4.82s/it]                                                  66%|██████▌   | 140/212 [12:31<05:46,  4.82s/it][INFO|trainer.py:4643] 2025-10-19 00:08:18,630 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-10-19 00:08:18,630 >>   Num examples = 748
+[INFO|trainer.py:4648] 2025-10-19 00:08:18,633 >>   Batch size = 16
+{'eval_loss': 0.5082115530967712, 'eval_runtime': 9.4105, 'eval_samples_per_second': 79.486, 'eval_steps_per_second': 4.994, 'epoch': 2.27}
+{'loss': 0.5218, 'grad_norm': 0.08637848496437073, 'learning_rate': 1.3171959848922791e-05, 'epoch': 2.45}
+{'loss': 0.5145, 'grad_norm': 0.09614872187376022, 'learning_rate': 1.061442442915895e-05, 'epoch': 2.64}
+
+  0%|          | 0/47 [00:00<?, ?it/s][A
+  4%|▍         | 2/47 [00:00<00:04, 10.29it/s][A
+  9%|▊         | 4/47 [00:00<00:06,  6.24it/s][A
+ 11%|█         | 5/47 [00:00<00:07,  5.36it/s][A
+ 13%|█▎        | 6/47 [00:01<00:07,  5.55it/s][A
+ 15%|█▍        | 7/47 [00:01<00:06,  5.86it/s][A
+ 17%|█▋        | 8/47 [00:01<00:06,  5.67it/s][A
+ 19%|█▉        | 9/47 [00:01<00:07,  5.26it/s][A
+ 21%|██▏       | 10/47 [00:01<00:07,  5.16it/s][A
+ 23%|██▎       | 11/47 [00:01<00:07,  5.09it/s][A
+ 26%|██▌       | 12/47 [00:02<00:07,  4.95it/s][A
+ 28%|██▊       | 13/47 [00:02<00:06,  5.02it/s][A
+ 30%|██▉       | 14/47 [00:02<00:06,  4.83it/s][A
+ 32%|███▏      | 15/47 [00:02<00:06,  4.85it/s][A
+ 34%|███▍      | 16/47 [00:02<00:06,  5.14it/s][A
+ 36%|███▌      | 17/47 [00:03<00:06,  4.92it/s][A
+ 38%|███▊      | 18/47 [00:03<00:05,  4.86it/s][A
+ 40%|████      | 19/47 [00:03<00:05,  4.92it/s][A
+ 43%|████▎     | 20/47 [00:03<00:04,  5.42it/s][A
+ 45%|████▍     | 21/47 [00:03<00:05,  5.20it/s][A
+ 47%|████▋     | 22/47 [00:04<00:05,  4.94it/s][A
+ 49%|████▉     | 23/47 [00:04<00:04,  5.36it/s][A
+ 51%|█████     | 24/47 [00:04<00:04,  5.26it/s][A
+ 53%|█████▎    | 25/47 [00:04<00:04,  5.10it/s][A
+ 55%|█████▌    | 26/47 [00:04<00:04,  5.20it/s][A
+ 57%|█████▋    | 27/47 [00:05<00:03,  5.07it/s][A
+ 60%|█████▉    | 28/47 [00:05<00:03,  5.40it/s][A
+ 62%|██████▏   | 29/47 [00:05<00:03,  5.33it/s][A
+ 64%|██████▍   | 30/47 [00:05<00:03,  4.81it/s][A
+ 66%|██████▌   | 31/47 [00:05<00:03,  4.95it/s][A
+ 68%|██████▊   | 32/47 [00:06<00:02,  5.09it/s][A
+ 70%|███████   | 33/47 [00:06<00:02,  4.99it/s][A
+ 72%|███████▏  | 34/47 [00:06<00:02,  5.07it/s][A
+ 74%|███████▍  | 35/47 [00:06<00:02,  4.68it/s][A
+ 77%|███████▋  | 36/47 [00:06<00:02,  4.96it/s][A
+ 79%|███████▊  | 37/47 [00:07<00:02,  4.58it/s][A
+ 81%|████████  | 38/47 [00:07<00:01,  4.89it/s][A
+ 83%|████████▎ | 39/47 [00:07<00:01,  4.77it/s][A
+ 85%|████████▌ | 40/47 [00:07<00:01,  5.01it/s][A
+ 87%|████████▋ | 41/47 [00:07<00:01,  5.31it/s][A
+ 89%|████████▉ | 42/47 [00:08<00:00,  5.39it/s][A
+ 91%|█████████▏| 43/47 [00:08<00:00,  5.41it/s][A
+ 94%|█████████▎| 44/47 [00:08<00:00,  5.03it/s][A
+ 96%|█████████▌| 45/47 [00:08<00:00,  4.92it/s][A
+ 98%|█████████▊| 46/47 [00:08<00:00,  4.70it/s][A
+100%|██████████| 47/47 [00:09<00:00,  4.81it/s][A                                                 
+                                               [A 66%|██████▌   | 140/212 [12:41<05:46,  4.82s/it]
+100%|██████████| 47/47 [00:09<00:00,  4.81it/s][A
+                                               [A[INFO|trainer.py:4309] 2025-10-19 00:08:28,057 >> Saving model checkpoint to ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-140
+[INFO|configuration_utils.py:763] 2025-10-19 00:08:28,087 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/config.json
+[INFO|configuration_utils.py:839] 2025-10-19 00:08:28,087 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 4096,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2421] 2025-10-19 00:08:28,443 >> chat template saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-140/chat_template.jinja
+[INFO|tokenization_utils_base.py:2590] 2025-10-19 00:08:28,450 >> tokenizer config file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-140/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2599] 2025-10-19 00:08:28,464 >> Special tokens file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-140/special_tokens_map.json
+ 67%|██████▋   | 141/212 [12:47<09:33,  8.08s/it] 67%|██████▋   | 142/212 [12:52<08:11,  7.03s/it] 67%|██████▋   | 143/212 [12:57<07:23,  6.42s/it] 68%|██████▊   | 144/212 [13:02<06:48,  6.01s/it] 68%|██████▊   | 145/212 [13:07<06:18,  5.65s/it] 69%|██████▉   | 146/212 [13:11<05:52,  5.34s/it] 69%|██████▉   | 147/212 [13:16<05:41,  5.26s/it] 70%|██████▉   | 148/212 [13:21<05:35,  5.25s/it] 70%|███████   | 149/212 [13:26<05:18,  5.05s/it] 71%|███████   | 150/212 [13:31<05:07,  4.96s/it]                                                  71%|███████   | 150/212 [13:31<05:07,  4.96s/it] 71%|███████   | 151/212 [13:36<05:11,  5.11s/it] 72%|███████▏  | 152/212 [13:41<05:01,  5.02s/it] 72%|███████▏  | 153/212 [13:46<04:49,  4.90s/it] 73%|███████▎  | 154/212 [13:51<04:49,  5.00s/it] 73%|███████▎  | 155/212 [13:55<04:36,  4.85s/it] 74%|███████▎  | 156/212 [14:00<04:24,  4.72s/it] 74%|███████▍  | 157/212 [14:04<04:09,  4.53s/it] 75%|███████▍  | 158/212 [14:09<04:11,  4.66s/it] 75%|███████▌  | 159/212 [14:12<03:34,  4.06s/it] 75%|███████▌  | 160/212 [14:16<03:35,  4.15s/it]                                                  75%|███████▌  | 160/212 [14:16<03:35,  4.15s/it][INFO|trainer.py:4643] 2025-10-19 00:10:03,111 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-10-19 00:10:03,111 >>   Num examples = 748
+[INFO|trainer.py:4648] 2025-10-19 00:10:03,114 >>   Batch size = 16
+{'eval_loss': 0.5037941336631775, 'eval_runtime': 9.4052, 'eval_samples_per_second': 79.53, 'eval_steps_per_second': 4.997, 'epoch': 2.64}
+{'loss': 0.5145, 'grad_norm': 0.08375132083892822, 'learning_rate': 8.190142503906798e-06, 'epoch': 2.83}
+{'loss': 0.5245, 'grad_norm': 0.08965305238962173, 'learning_rate': 5.972774652719275e-06, 'epoch': 3.02}
+
+  0%|          | 0/47 [00:00<?, ?it/s][A
+  4%|▍         | 2/47 [00:00<00:04, 10.29it/s][A
+  9%|▊         | 4/47 [00:00<00:06,  6.24it/s][A
+ 11%|█         | 5/47 [00:00<00:07,  5.39it/s][A
+ 13%|█▎        | 6/47 [00:01<00:07,  5.65it/s][A
+ 15%|█▍        | 7/47 [00:01<00:06,  5.95it/s][A
+ 17%|█▋        | 8/47 [00:01<00:06,  5.73it/s][A
+ 19%|█▉        | 9/47 [00:01<00:07,  5.29it/s][A
+ 21%|██▏       | 10/47 [00:01<00:07,  5.15it/s][A
+ 23%|██▎       | 11/47 [00:01<00:07,  5.08it/s][A
+ 26%|██▌       | 12/47 [00:02<00:07,  4.94it/s][A
+ 28%|██▊       | 13/47 [00:02<00:06,  5.03it/s][A
+ 30%|██▉       | 14/47 [00:02<00:06,  4.83it/s][A
+ 32%|███▏      | 15/47 [00:02<00:06,  4.85it/s][A
+ 34%|███▍      | 16/47 [00:02<00:06,  5.16it/s][A
+ 36%|███▌      | 17/47 [00:03<00:06,  4.93it/s][A
+ 38%|███▊      | 18/47 [00:03<00:05,  4.86it/s][A
+ 40%|████      | 19/47 [00:03<00:05,  4.92it/s][A
+ 43%|████▎     | 20/47 [00:03<00:04,  5.42it/s][A
+ 45%|████▍     | 21/47 [00:03<00:04,  5.20it/s][A
+ 47%|████▋     | 22/47 [00:04<00:05,  4.97it/s][A
+ 49%|████▉     | 23/47 [00:04<00:04,  5.38it/s][A
+ 51%|█████     | 24/47 [00:04<00:04,  5.28it/s][A
+ 53%|█████▎    | 25/47 [00:04<00:04,  5.11it/s][A
+ 55%|█████▌    | 26/47 [00:04<00:04,  5.24it/s][A
+ 57%|█████▋    | 27/47 [00:05<00:03,  5.10it/s][A
+ 60%|█████▉    | 28/47 [00:05<00:03,  5.40it/s][A
+ 62%|██████▏   | 29/47 [00:05<00:03,  5.33it/s][A
+ 64%|██████▍   | 30/47 [00:05<00:03,  4.81it/s][A
+ 66%|██████▌   | 31/47 [00:05<00:03,  4.96it/s][A
+ 68%|██████▊   | 32/47 [00:06<00:02,  5.10it/s][A
+ 70%|███████   | 33/47 [00:06<00:02,  5.00it/s][A
+ 72%|███████▏  | 34/47 [00:06<00:02,  5.06it/s][A
+ 74%|███████▍  | 35/47 [00:06<00:02,  4.64it/s][A
+ 77%|███████▋  | 36/47 [00:06<00:02,  4.93it/s][A
+ 79%|███████▊  | 37/47 [00:07<00:02,  4.55it/s][A
+ 81%|████████  | 38/47 [00:07<00:01,  4.86it/s][A
+ 83%|████████▎ | 39/47 [00:07<00:01,  4.74it/s][A
+ 85%|████████▌ | 40/47 [00:07<00:01,  4.98it/s][A
+ 87%|████████▋ | 41/47 [00:07<00:01,  5.28it/s][A
+ 89%|████████▉ | 42/47 [00:08<00:00,  5.34it/s][A
+ 91%|█████████▏| 43/47 [00:08<00:00,  5.37it/s][A
+ 94%|█████████▎| 44/47 [00:08<00:00,  4.99it/s][A
+ 96%|█████████▌| 45/47 [00:08<00:00,  4.90it/s][A
+ 98%|█████████▊| 46/47 [00:08<00:00,  4.71it/s][A
+100%|██████████| 47/47 [00:09<00:00,  4.83it/s][A                                                 
+                                               [A 75%|███████▌  | 160/212 [14:25<03:35,  4.15s/it]
+100%|██████████| 47/47 [00:09<00:00,  4.83it/s][A
+                                               [A[INFO|trainer.py:4309] 2025-10-19 00:10:12,533 >> Saving model checkpoint to ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-160
+[INFO|configuration_utils.py:763] 2025-10-19 00:10:12,567 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/config.json
+[INFO|configuration_utils.py:839] 2025-10-19 00:10:12,567 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 4096,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2421] 2025-10-19 00:10:12,924 >> chat template saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-160/chat_template.jinja
+[INFO|tokenization_utils_base.py:2590] 2025-10-19 00:10:12,931 >> tokenizer config file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-160/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2599] 2025-10-19 00:10:12,936 >> Special tokens file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-160/special_tokens_map.json
+ 76%|███████▌  | 161/212 [14:31<06:25,  7.57s/it] 76%|███████▋  | 162/212 [14:37<05:41,  6.82s/it] 77%|███████▋  | 163/212 [14:41<05:04,  6.22s/it] 77%|███████▋  | 164/212 [14:46<04:37,  5.77s/it] 78%|███████▊  | 165/212 [14:51<04:16,  5.45s/it] 78%|███████▊  | 166/212 [14:56<04:06,  5.35s/it] 79%|███████▉  | 167/212 [15:01<03:59,  5.33s/it] 79%|███████▉  | 168/212 [15:07<03:56,  5.38s/it] 80%|███████▉  | 169/212 [15:11<03:42,  5.18s/it] 80%|████████  | 170/212 [15:16<03:29,  4.99s/it]                                                  80%|████████  | 170/212 [15:16<03:29,  4.99s/it] 81%|████████  | 171/212 [15:21<03:30,  5.14s/it] 81%|████████  | 172/212 [15:26<03:20,  5.00s/it] 82%|████████▏ | 173/212 [15:31<03:11,  4.92s/it] 82%|████████▏ | 174/212 [15:35<03:03,  4.83s/it] 83%|████████▎ | 175/212 [15:41<03:04,  4.98s/it] 83%|████████▎ | 176/212 [15:45<02:53,  4.82s/it] 83%|████████▎ | 177/212 [15:50<02:45,  4.73s/it] 84%|████████▍ | 178/212 [15:55<02:45,  4.86s/it] 84%|████████▍ | 179/212 [16:00<02:43,  4.95s/it] 85%|████████▍ | 180/212 [16:05<02:40,  5.02s/it]                                                  85%|████████▍ | 180/212 [16:05<02:40,  5.02s/it][INFO|trainer.py:4643] 2025-10-19 00:11:52,479 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-10-19 00:11:52,480 >>   Num examples = 748
+[INFO|trainer.py:4648] 2025-10-19 00:11:52,482 >>   Batch size = 16
+{'eval_loss': 0.5013521909713745, 'eval_runtime': 9.4016, 'eval_samples_per_second': 79.561, 'eval_steps_per_second': 4.999, 'epoch': 3.02}
+{'loss': 0.5173, 'grad_norm': 0.07873160392045975, 'learning_rate': 4.029694475712443e-06, 'epoch': 3.21}
+{'loss': 0.5091, 'grad_norm': 0.0801863819360733, 'learning_rate': 2.419941480818641e-06, 'epoch': 3.4}
+
+  0%|          | 0/47 [00:00<?, ?it/s][A
+  4%|▍         | 2/47 [00:00<00:04, 10.29it/s][A
+  9%|▊         | 4/47 [00:00<00:06,  6.23it/s][A
+ 11%|█         | 5/47 [00:00<00:07,  5.42it/s][A
+ 13%|█▎        | 6/47 [00:01<00:07,  5.68it/s][A
+ 15%|█▍        | 7/47 [00:01<00:06,  5.96it/s][A
+ 17%|█▋        | 8/47 [00:01<00:06,  5.70it/s][A
+ 19%|█▉        | 9/47 [00:01<00:07,  5.25it/s][A
+ 21%|██▏       | 10/47 [00:01<00:07,  5.13it/s][A
+ 23%|██▎       | 11/47 [00:01<00:07,  5.06it/s][A
+ 26%|██▌       | 12/47 [00:02<00:07,  4.92it/s][A
+ 28%|██▊       | 13/47 [00:02<00:06,  4.98it/s][A
+ 30%|██▉       | 14/47 [00:02<00:06,  4.80it/s][A
+ 32%|███▏      | 15/47 [00:02<00:06,  4.79it/s][A
+ 34%|███▍      | 16/47 [00:02<00:06,  5.11it/s][A
+ 36%|███▌      | 17/47 [00:03<00:06,  4.90it/s][A
+ 38%|███▊      | 18/47 [00:03<00:06,  4.83it/s][A
+ 40%|████      | 19/47 [00:03<00:05,  4.91it/s][A
+ 43%|████▎     | 20/47 [00:03<00:05,  5.38it/s][A
+ 45%|████▍     | 21/47 [00:03<00:05,  5.17it/s][A
+ 47%|████▋     | 22/47 [00:04<00:05,  4.95it/s][A
+ 49%|████▉     | 23/47 [00:04<00:04,  5.34it/s][A
+ 51%|█████     | 24/47 [00:04<00:04,  5.26it/s][A
+ 53%|█████▎    | 25/47 [00:04<00:04,  5.10it/s][A
+ 55%|█████▌    | 26/47 [00:04<00:04,  5.23it/s][A
+ 57%|█████▋    | 27/47 [00:05<00:03,  5.08it/s][A
+ 60%|█████▉    | 28/47 [00:05<00:03,  5.39it/s][A
+ 62%|██████▏   | 29/47 [00:05<00:03,  5.35it/s][A
+ 64%|██████▍   | 30/47 [00:05<00:03,  4.82it/s][A
+ 66%|██████▌   | 31/47 [00:05<00:03,  4.95it/s][A
+ 68%|██████▊   | 32/47 [00:06<00:02,  5.08it/s][A
+ 70%|███████   | 33/47 [00:06<00:02,  4.98it/s][A
+ 72%|███████▏  | 34/47 [00:06<00:02,  5.05it/s][A
+ 74%|███████▍  | 35/47 [00:06<00:02,  4.66it/s][A
+ 77%|███████▋  | 36/47 [00:06<00:02,  4.94it/s][A
+ 79%|███████▊  | 37/47 [00:07<00:02,  4.56it/s][A
+ 81%|████████  | 38/47 [00:07<00:01,  4.84it/s][A
+ 83%|████████▎ | 39/47 [00:07<00:01,  4.73it/s][A
+ 85%|████████▌ | 40/47 [00:07<00:01,  4.97it/s][A
+ 87%|████████▋ | 41/47 [00:07<00:01,  5.27it/s][A
+ 89%|████████▉ | 42/47 [00:08<00:00,  5.35it/s][A
+ 91%|█████████▏| 43/47 [00:08<00:00,  5.32it/s][A
+ 94%|█████████▎| 44/47 [00:08<00:00,  4.98it/s][A
+ 96%|█████████▌| 45/47 [00:08<00:00,  4.88it/s][A
+ 98%|█████████▊| 46/47 [00:09<00:00,  4.68it/s][A
+100%|██████████| 47/47 [00:09<00:00,  4.80it/s][A                                                 
+                                               [A 85%|████████▍ | 180/212 [16:15<02:40,  5.02s/it]
+100%|██████████| 47/47 [00:09<00:00,  4.80it/s][A
+                                               [A[INFO|trainer.py:4309] 2025-10-19 00:12:01,931 >> Saving model checkpoint to ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-180
+[INFO|configuration_utils.py:763] 2025-10-19 00:12:01,966 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/config.json
+[INFO|configuration_utils.py:839] 2025-10-19 00:12:01,967 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 4096,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2421] 2025-10-19 00:12:02,327 >> chat template saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-180/chat_template.jinja
+[INFO|tokenization_utils_base.py:2590] 2025-10-19 00:12:02,334 >> tokenizer config file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-180/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2599] 2025-10-19 00:12:02,340 >> Special tokens file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-180/special_tokens_map.json
+ 85%|████████▌ | 181/212 [16:21<04:14,  8.22s/it] 86%|████████▌ | 182/212 [16:26<03:34,  7.15s/it] 86%|████████▋ | 183/212 [16:30<03:06,  6.42s/it] 87%|████████▋ | 184/212 [16:35<02:44,  5.88s/it] 87%|████████▋ | 185/212 [16:40<02:35,  5.74s/it] 88%|████████▊ | 186/212 [16:46<02:26,  5.62s/it] 88%|████████▊ | 187/212 [16:50<02:13,  5.35s/it] 89%|████████▊ | 188/212 [16:55<02:04,  5.18s/it] 89%|████████▉ | 189/212 [17:00<01:58,  5.13s/it] 90%|████████▉ | 190/212 [17:05<01:51,  5.07s/it]                                                  90%|████████▉ | 190/212 [17:05<01:51,  5.07s/it] 90%|█████████ | 191/212 [17:10<01:45,  5.04s/it] 91%|█████████ | 192/212 [17:15<01:38,  4.93s/it] 91%|█████████ | 193/212 [17:20<01:33,  4.91s/it] 92%|█████████▏| 194/212 [17:25<01:29,  4.96s/it] 92%|█████████▏| 195/212 [17:30<01:24,  4.98s/it] 92%|█████████▏| 196/212 [17:34<01:17,  4.83s/it] 93%|█████████▎| 197/212 [17:39<01:12,  4.82s/it] 93%|█████████▎| 198/212 [17:44<01:06,  4.75s/it] 94%|█████████▍| 199/212 [17:48<01:01,  4.74s/it] 94%|█████████▍| 200/212 [17:53<00:55,  4.67s/it]                                                  94%|█████████▍| 200/212 [17:53<00:55,  4.67s/it][INFO|trainer.py:4643] 2025-10-19 00:13:40,027 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-10-19 00:13:40,027 >>   Num examples = 748
+[INFO|trainer.py:4648] 2025-10-19 00:13:40,030 >>   Batch size = 16
+{'eval_loss': 0.5002953410148621, 'eval_runtime': 9.4303, 'eval_samples_per_second': 79.319, 'eval_steps_per_second': 4.984, 'epoch': 3.4}
+{'loss': 0.5151, 'grad_norm': 0.08778711408376694, 'learning_rate': 1.1924271982133945e-06, 'epoch': 3.59}
+{'loss': 0.5063, 'grad_norm': 0.08980544656515121, 'learning_rate': 3.8444902822147296e-07, 'epoch': 3.78}
+
+  0%|          | 0/47 [00:00<?, ?it/s][A
+  4%|▍         | 2/47 [00:00<00:04, 10.33it/s][A
+  9%|▊         | 4/47 [00:00<00:06,  6.26it/s][A
+ 11%|█         | 5/47 [00:00<00:07,  5.42it/s][A
+ 13%|█▎        | 6/47 [00:01<00:07,  5.68it/s][A
+ 15%|█▍        | 7/47 [00:01<00:06,  5.98it/s][A
+ 17%|█▋        | 8/47 [00:01<00:06,  5.75it/s][A
+ 19%|█▉        | 9/47 [00:01<00:07,  5.30it/s][A
+ 21%|██▏       | 10/47 [00:01<00:07,  5.18it/s][A
+ 23%|██▎       | 11/47 [00:01<00:07,  5.09it/s][A
+ 26%|██▌       | 12/47 [00:02<00:07,  4.94it/s][A
+ 28%|██▊       | 13/47 [00:02<00:06,  5.03it/s][A
+ 30%|██▉       | 14/47 [00:02<00:06,  4.83it/s][A
+ 32%|███▏      | 15/47 [00:02<00:06,  4.84it/s][A
+ 34%|███▍      | 16/47 [00:02<00:06,  5.16it/s][A
+ 36%|███▌      | 17/47 [00:03<00:06,  4.93it/s][A
+ 38%|███▊      | 18/47 [00:03<00:05,  4.85it/s][A
+ 40%|████      | 19/47 [00:03<00:05,  4.92it/s][A
+ 43%|████▎     | 20/47 [00:03<00:04,  5.42it/s][A
+ 45%|████▍     | 21/47 [00:03<00:04,  5.20it/s][A
+ 47%|████▋     | 22/47 [00:04<00:05,  4.97it/s][A
+ 49%|████▉     | 23/47 [00:04<00:04,  5.38it/s][A
+ 51%|█████     | 24/47 [00:04<00:04,  5.28it/s][A
+ 53%|█████▎    | 25/47 [00:04<00:04,  5.11it/s][A
+ 55%|█████▌    | 26/47 [00:04<00:04,  5.23it/s][A
+ 57%|█████▋    | 27/47 [00:05<00:03,  5.08it/s][A
+ 60%|█████▉    | 28/47 [00:05<00:03,  5.40it/s][A
+ 62%|██████▏   | 29/47 [00:05<00:03,  5.33it/s][A
+ 64%|██████▍   | 30/47 [00:05<00:03,  4.80it/s][A
+ 66%|██████▌   | 31/47 [00:05<00:03,  4.95it/s][A
+ 68%|██████▊   | 32/47 [00:06<00:02,  5.09it/s][A
+ 70%|███████   | 33/47 [00:06<00:02,  4.99it/s][A
+ 72%|███████▏  | 34/47 [00:06<00:02,  5.04it/s][A
+ 74%|███████▍  | 35/47 [00:06<00:02,  4.66it/s][A
+ 77%|███████▋  | 36/47 [00:06<00:02,  4.93it/s][A
+ 79%|███████▊  | 37/47 [00:07<00:02,  4.54it/s][A
+ 81%|████████  | 38/47 [00:07<00:01,  4.85it/s][A
+ 83%|████████▎ | 39/47 [00:07<00:01,  4.74it/s][A
+ 85%|████████▌ | 40/47 [00:07<00:01,  4.97it/s][A
+ 87%|████████▋ | 41/47 [00:07<00:01,  5.27it/s][A
+ 89%|████████▉ | 42/47 [00:08<00:00,  5.36it/s][A
+ 91%|█████████▏| 43/47 [00:08<00:00,  5.38it/s][A
+ 94%|█████████▎| 44/47 [00:08<00:00,  5.00it/s][A
+ 96%|█████████▌| 45/47 [00:08<00:00,  4.89it/s][A
+ 98%|█████████▊| 46/47 [00:08<00:00,  4.69it/s][A
+100%|██████████| 47/47 [00:09<00:00,  4.79it/s][A                                                 
+                                               [A 94%|█████████▍| 200/212 [18:02<00:55,  4.67s/it]
+100%|██████████| 47/47 [00:09<00:00,  4.79it/s][A
+                                               [A[INFO|trainer.py:4309] 2025-10-19 00:13:49,463 >> Saving model checkpoint to ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-200
+[INFO|configuration_utils.py:763] 2025-10-19 00:13:49,499 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/config.json
+[INFO|configuration_utils.py:839] 2025-10-19 00:13:49,500 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 4096,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2421] 2025-10-19 00:13:49,864 >> chat template saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-200/chat_template.jinja
+[INFO|tokenization_utils_base.py:2590] 2025-10-19 00:13:49,873 >> tokenizer config file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-200/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2599] 2025-10-19 00:13:49,881 >> Special tokens file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-200/special_tokens_map.json
+ 95%|█████████▍| 201/212 [18:08<01:26,  7.89s/it] 95%|█████████▌| 202/212 [18:13<01:10,  7.03s/it] 96%|█████████▌| 203/212 [18:19<00:59,  6.57s/it] 96%|█████████▌| 204/212 [18:24<00:49,  6.16s/it] 97%|█████████▋| 205/212 [18:29<00:40,  5.76s/it] 97%|█████████▋| 206/212 [18:33<00:32,  5.40s/it] 98%|█████████▊| 207/212 [18:38<00:26,  5.24s/it] 98%|█████████▊| 208/212 [18:43<00:20,  5.18s/it] 99%|█████████▊| 209/212 [18:48<00:15,  5.08s/it] 99%|█████████▉| 210/212 [18:53<00:10,  5.04s/it]                                                  99%|█████████▉| 210/212 [18:53<00:10,  5.04s/it]100%|█████████▉| 211/212 [18:58<00:05,  5.05s/it]100%|██████████| 212/212 [19:01<00:00,  4.30s/it][INFO|trainer.py:4309] 2025-10-19 00:14:47,853 >> Saving model checkpoint to ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-212
+[INFO|configuration_utils.py:763] 2025-10-19 00:14:47,881 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/config.json
+[INFO|configuration_utils.py:839] 2025-10-19 00:14:47,881 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 4096,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2421] 2025-10-19 00:14:48,233 >> chat template saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-212/chat_template.jinja
+[INFO|tokenization_utils_base.py:2590] 2025-10-19 00:14:48,239 >> tokenizer config file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-212/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2599] 2025-10-19 00:14:48,246 >> Special tokens file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/checkpoint-212/special_tokens_map.json
+[INFO|trainer.py:2810] 2025-10-19 00:14:49,146 >> 
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+
+                                                 100%|██████████| 212/212 [19:02<00:00,  4.30s/it]100%|██████████| 212/212 [19:02<00:00,  5.39s/it]
+[INFO|trainer.py:4309] 2025-10-19 00:14:49,182 >> Saving model checkpoint to ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory
+[INFO|configuration_utils.py:763] 2025-10-19 00:14:49,210 >> loading configuration file /root/All_in_llm/models/Qwen2.5-Math-1.5B/config.json
+[INFO|configuration_utils.py:839] 2025-10-19 00:14:49,211 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 4096,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2421] 2025-10-19 00:14:49,556 >> chat template saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/chat_template.jinja
+[INFO|tokenization_utils_base.py:2590] 2025-10-19 00:14:49,562 >> tokenizer config file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2599] 2025-10-19 00:14:49,568 >> Special tokens file saved in ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/special_tokens_map.json
+{'eval_loss': 0.49987369775772095, 'eval_runtime': 9.4078, 'eval_samples_per_second': 79.509, 'eval_steps_per_second': 4.996, 'epoch': 3.78}
+{'loss': 0.5184, 'grad_norm': 0.09225936979055405, 'learning_rate': 2.05569786813925e-08, 'epoch': 3.97}
+{'train_runtime': 1150.0162, 'train_samples_per_second': 23.391, 'train_steps_per_second': 0.184, 'train_loss': 0.6165117171575438, 'epoch': 4.0}
+***** train metrics *****
+  epoch                    =        4.0
+  total_flos               = 78659362GF
+  train_loss               =     0.6165
+  train_runtime            = 0:19:10.01
+  train_samples_per_second =     23.391
+  train_steps_per_second   =      0.184
+Figure saved at: ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/training_loss.png
+Figure saved at: ./output/qwen2.5-1.5b-math_gsm8k_lora_llamafactory/training_eval_loss.png
+[WARNING|2025-10-19 00:14:50] llamafactory.extras.ploting:148 >> No metric eval_accuracy to plot.
+[INFO|trainer.py:4643] 2025-10-19 00:14:50,152 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-10-19 00:14:50,152 >>   Num examples = 748
+[INFO|trainer.py:4648] 2025-10-19 00:14:50,154 >>   Batch size = 16
+  0%|          | 0/47 [00:00<?, ?it/s]  4%|▍         | 2/47 [00:00<00:04, 10.30it/s]  9%|▊         | 4/47 [00:00<00:06,  6.26it/s] 11%|█         | 5/47 [00:00<00:07,  5.43it/s] 13%|█▎        | 6/47 [00:00<00:07,  5.71it/s] 15%|█▍        | 7/47 [00:01<00:06,  6.03it/s] 17%|█▋        | 8/47 [00:01<00:06,  5.80it/s] 19%|█▉        | 9/47 [00:01<00:07,  5.36it/s] 21%|██▏       | 10/47 [00:01<00:07,  5.24it/s] 23%|██▎       | 11/47 [00:01<00:06,  5.16it/s] 26%|██▌       | 12/47 [00:02<00:06,  5.02it/s] 28%|██▊       | 13/47 [00:02<00:06,  5.10it/s] 30%|██▉       | 14/47 [00:02<00:06,  4.90it/s] 32%|███▏      | 15/47 [00:02<00:06,  4.92it/s] 34%|███▍      | 16/47 [00:02<00:05,  5.24it/s] 36%|███▌      | 17/47 [00:03<00:05,  5.01it/s] 38%|███▊      | 18/47 [00:03<00:05,  4.94it/s] 40%|████      | 19/47 [00:03<00:05,  5.01it/s] 43%|████▎     | 20/47 [00:03<00:04,  5.52it/s] 45%|████▍     | 21/47 [00:03<00:04,  5.29it/s] 47%|████▋     | 22/47 [00:04<00:04,  5.05it/s] 49%|████▉     | 23/47 [00:04<00:04,  5.47it/s] 51%|█████     | 24/47 [00:04<00:04,  5.36it/s] 53%|█████▎    | 25/47 [00:04<00:04,  5.19it/s] 55%|█████▌    | 26/47 [00:04<00:03,  5.32it/s] 57%|█████▋    | 27/47 [00:05<00:03,  5.17it/s] 60%|█████▉    | 28/47 [00:05<00:03,  5.50it/s] 62%|██████▏   | 29/47 [00:05<00:03,  5.43it/s] 64%|██████▍   | 30/47 [00:05<00:03,  4.88it/s] 66%|██████▌   | 31/47 [00:05<00:03,  5.03it/s] 68%|██████▊   | 32/47 [00:06<00:02,  5.18it/s] 70%|███████   | 33/47 [00:06<00:02,  5.07it/s] 72%|███████▏  | 34/47 [00:06<00:02,  5.14it/s] 74%|███████▍  | 35/47 [00:06<00:02,  4.73it/s] 77%|███████▋  | 36/47 [00:06<00:02,  5.02it/s] 79%|███████▊  | 37/47 [00:07<00:02,  4.61it/s] 81%|████████  | 38/47 [00:07<00:01,  4.93it/s] 83%|████████▎ | 39/47 [00:07<00:01,  4.81it/s] 85%|████████▌ | 40/47 [00:07<00:01,  5.06it/s] 87%|████████▋ | 41/47 [00:07<00:01,  5.37it/s] 89%|████████▉ | 42/47 [00:07<00:00,  5.45it/s] 91%|█████████▏| 43/47 [00:08<00:00,  5.48it/s] 94%|█████████▎| 44/47 [00:08<00:00,  5.09it/s] 96%|█████████▌| 45/47 [00:08<00:00,  4.98it/s] 98%|█████████▊| 46/47 [00:08<00:00,  4.76it/s]100%|██████████| 47/47 [00:09<00:00,  4.87it/s]100%|██████████| 47/47 [00:09<00:00,  5.19it/s]
+[INFO|modelcard.py:456] 2025-10-19 00:14:59,474 >> Dropping the following result as it does not have all the necessary fields:
+{'task': {'name': 'Causal Language Modeling', 'type': 'text-generation'}}
+***** eval metrics *****
+  epoch                   =        4.0
+  eval_loss               =     0.4998
+  eval_runtime            = 0:00:09.27
+  eval_samples_per_second =     80.648
+  eval_steps_per_second   =      5.067
+swanlab: Experiment qwen2.5_1.5b_math has completed
+swanlab: 🏠 View project at https://swanlab.cn/@nev8r/math_gsm8k_lora
+swanlab: 🚀 View run at 
+https://swanlab.cn/@nev8r/math_gsm8k_lora/runs/ehup8724fjva4jjlkie1v
+
+✅ 训练完成
+报告路径: /root/All_in_llm/post_training/sft/gpu_report/20251018_235439_gpu_report.md

@@ -1,0 +1,30 @@
+
+# 训练常用
+. gpu.sh
+nohup ./gpu.sh > gpu.log 2>&1 &
+
+# 评测
+. eval.sh
+
+
+# other
+hf  download --repo-type dataset openai/gsm8k --local-dir /data/gsm8k
+hf  download --repo-type model Qwen/Qwen2.5-3B-Instruct --local-dir /root/All_in_llm/models/Qwen2.5-3B-Instruct 
+
+python -m vllm.entrypoints.openai.api_server \
+    --host localhost \
+    --model /root/All_in_llm/models/Qwen2.5-Math-7B \
+    --gpu-memory-utilization 0.9 \
+    --tensor-parallel-size 1 \
+    --dtype bfloat16 \
+    --max-seq-len-to-capture 4096 \
+    --max_num_seqs 256 \
+    --max_num_batched_tokens 4096 \
+    --served-model-name Qwen2.5-Math-7B \
+    --block_size 128 \
+    --enforce-eager
+
+
+
+
+vllm serve /root/All_in_llm/post_training/sft/merge_models/Qwen2.5-7B_Math_gsm8k_lora --host 0.0.0.0 --port 8000

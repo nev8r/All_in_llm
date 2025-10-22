@@ -1,0 +1,2 @@
+
+nohup python grpo.py > grpo.log 2>&1 &
