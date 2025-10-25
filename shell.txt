@@ -1,1 +1,6 @@
- sh cuda_12.6.0_560.28.03_linux.run --toolkit --silent --override
+
+
+conda activate dbgpt_hub
+nohup ollama serve > /root/ollama.log 2>&1 &
+tail -f /root/ollama.log
+pkill -f ollama serve
